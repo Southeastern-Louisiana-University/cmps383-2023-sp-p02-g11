@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace SP23.P02.Web.Features.TrainStations;
 
-public class TrainStationConfiguration : IEntityTypeConfiguration<TrainStation>
+public class UserConfiguration : IEntityTypeConfiguration<TrainStation>
 {
     public void Configure(EntityTypeBuilder<TrainStation> builder)
     {
