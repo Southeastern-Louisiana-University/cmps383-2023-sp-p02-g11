@@ -2,8 +2,11 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using SP23.P02.Web.Data;
 using SP23.P02.Web.Features.Authorization;
 using SP23.P02.Web.Features.Users;
+
+
 namespace SP23.P01.Web.Controllers;
 
 
@@ -11,46 +14,62 @@ namespace SP23.P01.Web.Controllers;
 [Route("api/authentication")]
 public class AuthenticationController : ControllerBase
 {
-    private readonly UserManager<IdentityUser> userManager;
-    private readonly SignInManager<IdentityUser> signInManager;
+    private readonly UserManager<User> userManager;
+    private readonly SignInManager<User> signInManager;
+    private readonly DataContext dataContext;
 
 
     public AuthenticationController
         (
-        UserManager<IdentityUser> userManager, 
-        SignInManager<IdentityUser> signInManager
+        UserManager<User> userManager,
+        SignInManager<User> signInManager,
+       DataContext dataContext
         )
+
     {
         this.userManager = userManager;
         this.signInManager = signInManager;
-
+        this.dataContext = dataContext;
     }
 
 
-  
+
     [HttpPost("login")]
     [AllowAnonymous]
-    public async Task<ActionResult<UserDto>> Login( LoginDto dto)
+    public async Task<ActionResult<UserDto>> Login([FromBody] LoginDto dto)
     {
+
         var user = await userManager.FindByNameAsync(dto.UserName);
 
         if (user == null)
         {
-            return BadRequest();
-        }
-        if(user.UserName== null) { 
-            return BadRequest();
+            return NotFound("User not found.");
         }
 
-        var result = await signInManager.CheckPasswordSignInAsync(user, dto.Password,false);
+        if (string.IsNullOrEmpty(user.UserName))
+        {
+            return BadRequest("Username cannot be empty.");
+        }
+
+        var result = await signInManager.CheckPasswordSignInAsync(user, dto.Password, false);
 
         if (!result.Succeeded)
         {
             return BadRequest();
         }
-        await signInManager.SignInAsync(user,false);
+        await signInManager.SignInAsync(user, true);
 
-        var dtoReturn = await GetUDto((IQueryable<User>)userManager.Users).SingleAsync(x => x.UserName == user.UserName);
+        //    var resultant = new UserDto
+        //    {
+        //        Id = user.Id,
+        //        UserName = user.UserName,
+        //        Roles = user.Roles.Select(x =>  x.Role.Name).ToArray()
+
+        //    };
+        //    return Ok(resultant);
+        //}
+
+        var dtoReturn = await GetUDto(userManager.Users).SingleAsync(x => x.UserName == user.UserName);
         return Ok(dtoReturn);
     }
 
@@ -58,21 +77,22 @@ public class AuthenticationController : ControllerBase
     [Authorize]
     public async Task<ActionResult> Logout()
     {
+
         await signInManager.SignOutAsync();
         return Ok();
     }
 
     [HttpGet("me")]
     [Authorize]
-public async Task<ActionResult<UserDto>> GetCurrentUser()
-{
-        var user = User.GetCurrentUserName();
-    if (user == null)
+    public async Task<ActionResult<UserDto>> GetCurrentUser()
     {
-        return Unauthorized();
-    }
-       
-        var resultDto = await GetUDto((IQueryable<User>)userManager.Users).SingleAsync(x => x.UserName == user);
+        var user = User.GetCurrentUserName();
+        if (user == null)
+        {
+            return Unauthorized();
+        }
+
+        var resultDto = await GetUDto(userManager.Users).SingleAsync(x => x.UserName == user);
         return Ok(resultDto);
     }
 
@@ -82,7 +102,7 @@ public async Task<ActionResult<UserDto>> GetCurrentUser()
         {
             Id = x.Id,
             UserName = x.UserName,
-            Roles = x.Roles.Select(y => y.Role!.Name).ToArray()
+            Roles = x.Roles.Select(y => y.Role.Name).ToArray()
         });
     }
 }

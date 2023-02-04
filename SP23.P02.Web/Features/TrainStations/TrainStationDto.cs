@@ -8,6 +8,6 @@ public class TrainStationDto
 
     public string Address { get; set; }
 
-    public int  ManagerId { get; set; }
+    public int?  ManagerId { get; set; }
   
 }

@@ -9,6 +9,6 @@ namespace SP23.P02.Web.Features.Roles
 
         public const string User = nameof(User);
 
-        public ICollection<UserRole> Users { get; set; } = new List<UserRole>();
+        public virtual ICollection<UserRole> Users { get; set; } = new List<UserRole>();
     }
 }

@@ -15,8 +15,11 @@ public static class UserPrincipalExtensions
 
     public static string? GetCurrentUserName(this ClaimsPrincipal claimsPrincipal)
     {
-        // same as: claimsPrincipal.FindFirstValue(ClaimTypes.Name)
         return claimsPrincipal.Identity?.Name;
+    }
+    public static string? GetCurrentUserRole(this ClaimsPrincipal claimsPrincipal)
+    {
+        return claimsPrincipal.GetHashCode().ToString();
     }
 
 }
