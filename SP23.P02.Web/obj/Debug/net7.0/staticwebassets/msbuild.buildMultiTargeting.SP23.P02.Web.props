@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\SP23.P02.Web.props" />
+</Project>
