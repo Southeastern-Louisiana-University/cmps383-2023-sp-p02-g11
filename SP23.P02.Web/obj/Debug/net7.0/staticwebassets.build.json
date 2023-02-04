@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "6m3kbzvwcGCnjuRb3fHauTu0BdyWmxn8YgUYyp0a06g=",
+  "Source": "SP23.P02.Web",
+  "BasePath": "_content/SP23.P02.Web",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
