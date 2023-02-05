@@ -167,6 +167,9 @@ namespace SP23.P02.Web.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("ManagerId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(120)
@@ -174,7 +177,30 @@ namespace SP23.P02.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TrainStation", (string)null);
+                    b.ToTable("TrainStations");
+                });
+
+            modelBuilder.Entity("SP23.P02.Web.Features.UserRoles.UserRole", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserRoles");
                 });
 
             modelBuilder.Entity("SP23.P02.Web.Features.Users.User", b =>
