@@ -67,7 +67,6 @@ namespace SP23.P02.Web.Controllers
                 return BadRequest();
             }
 
-
             var roleResult = await userManager.AddToRolesAsync(newUser, dto.Roles);
 
             if (!roleResult.Succeeded)

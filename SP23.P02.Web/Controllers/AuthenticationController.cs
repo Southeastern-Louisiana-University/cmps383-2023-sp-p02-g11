@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using SP23.P02.Web.Data;
 using SP23.P02.Web.Features.Authorization;
 using SP23.P02.Web.Features.Users;
+using System.Linq.Expressions;
 
 namespace SP23.P01.Web.Controllers;
 
@@ -14,20 +15,15 @@ public class AuthenticationController : ControllerBase
 {
     private readonly UserManager<User> userManager;
     private readonly SignInManager<User> signInManager;
-    private readonly DataContext dataContext;
-
 
     public AuthenticationController
         (
             UserManager<User> userManager,
-            SignInManager<User> signInManager,
-            DataContext dataContext
+            SignInManager<User> signInManager
         )
-
     {
         this.userManager = userManager;
         this.signInManager = signInManager;
-        this.dataContext = dataContext;
     }
 
     [HttpPost("login")]
@@ -95,8 +91,8 @@ public class AuthenticationController : ControllerBase
         {
             Id = x.Id,
             UserName = x.UserName,
-            //Roles = x.Roles.Select(y => y.Role.Name).ToArray()
-        });
+            Roles = x.Roles.Select(y => y.Role.Name).ToArray()
+        }) ;
     }
 }
 
