@@ -4,10 +4,7 @@ using SP23.P02.Web.Data;
 using System.Data;
 using SP23.P02.Web.Features.Roles;
 using SP23.P02.Web.Features.Users;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
-using SP23.P02.Web.Features.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 

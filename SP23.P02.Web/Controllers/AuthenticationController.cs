@@ -6,9 +6,7 @@ using SP23.P02.Web.Data;
 using SP23.P02.Web.Features.Authorization;
 using SP23.P02.Web.Features.Users;
 
-
 namespace SP23.P01.Web.Controllers;
-
 
 [ApiController]
 [Route("api/authentication")]
@@ -21,9 +19,9 @@ public class AuthenticationController : ControllerBase
 
     public AuthenticationController
         (
-        UserManager<User> userManager,
-        SignInManager<User> signInManager,
-       DataContext dataContext
+            UserManager<User> userManager,
+            SignInManager<User> signInManager,
+            DataContext dataContext
         )
 
     {
@@ -32,13 +30,10 @@ public class AuthenticationController : ControllerBase
         this.dataContext = dataContext;
     }
 
-
-
     [HttpPost("login")]
     [AllowAnonymous]
     public async Task<ActionResult<UserDto>> Login([FromBody] LoginDto dto)
     {
-
         var user = await userManager.FindByNameAsync(dto.UserName);
 
         if (user == null)
@@ -58,17 +53,16 @@ public class AuthenticationController : ControllerBase
             return BadRequest();
         }
         await signInManager.SignInAsync(user, true);
-
-        //    var resultant = new UserDto
-        //    {
-        //        Id = user.Id,
-        //        UserName = user.UserName,
-        //        Roles = user.Roles.Select(x =>  x.Role.Name).ToArray()
-
-        //    };
-        //    return Ok(resultant);
-        //}
-
+        /*
+        var resultant = new UserDto
+            {
+                Id = user.Id,
+                UserName = user.UserName,
+                Roles = user.Roles.Select(x => x.Role.Name).ToArray()
+            };
+        
+        return Ok(resultant);
+        */
         var dtoReturn = await GetUDto(userManager.Users).SingleAsync(x => x.UserName == user.UserName);
         return Ok(dtoReturn);
     }
@@ -77,7 +71,6 @@ public class AuthenticationController : ControllerBase
     [Authorize]
     public async Task<ActionResult> Logout()
     {
-
         await signInManager.SignOutAsync();
         return Ok();
     }

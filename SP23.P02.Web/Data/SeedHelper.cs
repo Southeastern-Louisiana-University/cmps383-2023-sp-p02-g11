@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SP23.P02.Web.Features.Roles;
 using SP23.P02.Web.Features.TrainStations;
