@@ -52,7 +52,6 @@ public static class SeedHelper
         }
     }
 
-
     public static async Task AddUsers(IServiceProvider serviceProvider)
     {
         var userManager = serviceProvider.GetRequiredService<UserManager<User>>();

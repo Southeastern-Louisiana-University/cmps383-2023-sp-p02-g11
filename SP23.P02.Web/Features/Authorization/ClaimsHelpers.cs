@@ -21,5 +21,4 @@ public static class UserPrincipalExtensions
     {
         return claimsPrincipal.GetHashCode().ToString();
     }
-
 }

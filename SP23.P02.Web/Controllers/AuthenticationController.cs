@@ -2,10 +2,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using SP23.P02.Web.Data;
 using SP23.P02.Web.Features.Authorization;
 using SP23.P02.Web.Features.Users;
-using System.Linq.Expressions;
+using SP23.P02.Web.Features.Roles;
 
 namespace SP23.P01.Web.Controllers;
 
@@ -13,13 +12,13 @@ namespace SP23.P01.Web.Controllers;
 [Route("api/authentication")]
 public class AuthenticationController : ControllerBase
 {
-    private readonly UserManager<User> userManager;
     private readonly SignInManager<User> signInManager;
+    private readonly UserManager<User> userManager;
 
     public AuthenticationController
         (
-            UserManager<User> userManager,
-            SignInManager<User> signInManager
+            SignInManager<User> signInManager,
+            UserManager<User> userManager
         )
     {
         this.userManager = userManager;
@@ -35,11 +34,6 @@ public class AuthenticationController : ControllerBase
         if (user == null)
         {
             return NotFound("User not found.");
-        }
-
-        if (string.IsNullOrEmpty(user.UserName))
-        {
-            return BadRequest("Username cannot be empty.");
         }
 
         var result = await signInManager.CheckPasswordSignInAsync(user, dto.Password, false);
@@ -76,11 +70,6 @@ public class AuthenticationController : ControllerBase
     public async Task<ActionResult<UserDto>> GetCurrentUser()
     {
         var user = User.GetCurrentUserName();
-        if (user == null)
-        {
-            return Unauthorized();
-        }
-
         var resultDto = await GetUDto(userManager.Users).SingleAsync(x => x.UserName == user);
         return Ok(resultDto);
     }
@@ -91,8 +80,7 @@ public class AuthenticationController : ControllerBase
         {
             Id = x.Id,
             UserName = x.UserName,
-            Roles = x.Roles.Select(y => y.Role.Name).ToArray()
+            Roles = x.Roles.Select(y => y.Role!.Name).ToArray()
         }) ;
     }
 }
-

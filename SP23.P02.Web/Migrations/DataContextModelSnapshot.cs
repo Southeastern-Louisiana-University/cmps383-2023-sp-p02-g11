@@ -296,7 +296,7 @@ namespace SP23.P02.Web.Migrations
                         .IsRequired();
 
                     b.HasOne("SP23.P02.Web.Features.Users.User", "User")
-                        .WithMany()
+                        .WithMany("Roles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -318,6 +318,11 @@ namespace SP23.P02.Web.Migrations
             modelBuilder.Entity("SP23.P02.Web.Features.Roles.Role", b =>
                 {
                     b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("SP23.P02.Web.Features.Users.User", b =>
+                {
+                    b.Navigation("Roles");
                 });
 #pragma warning restore 612, 618
         }

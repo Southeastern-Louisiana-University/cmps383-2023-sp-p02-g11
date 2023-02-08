@@ -9,7 +9,5 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
     {
         builder.Property(x => x.UserName)
             .IsRequired();
-
-        builder.Ignore(x => x.Roles);
     }
 }

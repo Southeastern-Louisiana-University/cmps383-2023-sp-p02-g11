@@ -5,7 +5,7 @@
 namespace SP23.P02.Web.Migrations
 {
     /// <inheritdoc />
-    public partial class UpdateManagerTrainStation : Migration
+    public partial class ManagerId : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

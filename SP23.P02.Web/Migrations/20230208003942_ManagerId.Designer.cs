@@ -12,8 +12,8 @@ using SP23.P02.Web.Data;
 namespace SP23.P02.Web.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230206193822_UpdateManager-TrainStation")]
-    partial class UpdateManagerTrainStation
+    [Migration("20230208003942_ManagerId")]
+    partial class ManagerId
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -299,7 +299,7 @@ namespace SP23.P02.Web.Migrations
                         .IsRequired();
 
                     b.HasOne("SP23.P02.Web.Features.Users.User", "User")
-                        .WithMany()
+                        .WithMany("Roles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -321,6 +321,11 @@ namespace SP23.P02.Web.Migrations
             modelBuilder.Entity("SP23.P02.Web.Features.Roles.Role", b =>
                 {
                     b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("SP23.P02.Web.Features.Users.User", b =>
+                {
+                    b.Navigation("Roles");
                 });
 #pragma warning restore 612, 618
         }
