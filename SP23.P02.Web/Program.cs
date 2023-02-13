@@ -5,6 +5,7 @@ using System.Data;
 using SP23.P02.Web.Features.Roles;
 using SP23.P02.Web.Features.Users;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -90,7 +91,20 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllers();
+app.UseEndpoints(routeBuilder =>
+{
+    routeBuilder.MapControllers();
+});
+
+app.UseStaticFiles();
+app.UseSpa(spaBuilder =>
+{
+    spaBuilder.Options.SourcePath = "ClientApp";
+    if (app.Environment.IsDevelopment())
+    {
+        spaBuilder.UseReactDevelopmentServer("https://localhost:3000/");
+    }
+});
 
 app.Run();
 
