@@ -27,10 +27,14 @@
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.selu.sp23.p02.g11"
-
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "ab37f87b-f419-46e9-90de-7e42c014d67b"
+      }
     }
   }
 }
