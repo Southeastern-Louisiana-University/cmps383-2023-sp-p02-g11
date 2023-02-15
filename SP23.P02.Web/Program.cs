@@ -91,10 +91,11 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseEndpoints(routeBuilder =>
-{
-    routeBuilder.MapControllers();
-});
+//app.UseEndpoints(routeBuilder =>
+//{ 
+//    routeBuilder.MapControllers();
+//});
+app.MapControllers();
 
 app.UseStaticFiles();
 app.UseSpa(spaBuilder =>
