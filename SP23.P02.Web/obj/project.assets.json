@@ -4896,19 +4896,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Stacie\\.nuget\\packages\\": {}
+    "C:\\Users\\jakep\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Stacie\\Desktop\\Southeastern\\Spring 2023\\383\\Phase 2-2\\cmps383-2023-sp-p02-g11\\SP23.P02.Web\\SP23.P02.Web.csproj",
+      "projectUniqueName": "C:\\Users\\jakep\\source\\repos\\cmps383-2023-sp-p02-g11\\SP23.P02.Web\\SP23.P02.Web.csproj",
       "projectName": "SP23.P02.Web",
-      "projectPath": "C:\\Users\\Stacie\\Desktop\\Southeastern\\Spring 2023\\383\\Phase 2-2\\cmps383-2023-sp-p02-g11\\SP23.P02.Web\\SP23.P02.Web.csproj",
-      "packagesPath": "C:\\Users\\Stacie\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Stacie\\Desktop\\Southeastern\\Spring 2023\\383\\Phase 2-2\\cmps383-2023-sp-p02-g11\\SP23.P02.Web\\obj\\",
+      "projectPath": "C:\\Users\\jakep\\source\\repos\\cmps383-2023-sp-p02-g11\\SP23.P02.Web\\SP23.P02.Web.csproj",
+      "packagesPath": "C:\\Users\\jakep\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\jakep\\source\\repos\\cmps383-2023-sp-p02-g11\\SP23.P02.Web\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Stacie\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\jakep\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

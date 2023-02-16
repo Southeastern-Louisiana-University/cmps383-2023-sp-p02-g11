@@ -59,14 +59,9 @@ builder.Services.ConfigureApplicationCookie(options =>
 
 });
 
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("RequireAdministratorRole", policy => policy.RequireRole("admin"));
-    options.FallbackPolicy = new AuthorizationPolicyBuilder()
-        .RequireAuthenticatedUser()
-        .Build();
-});
+builder.Services.AddAuthorization();
 builder.Services.AddControllers();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -89,13 +84,15 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
+
+app.UseRouting();
+
 app.UseAuthorization();
 
-//app.UseEndpoints(routeBuilder =>
-//{ 
-//    routeBuilder.MapControllers();
-//});
-app.MapControllers();
+app.UseEndpoints(routeBuilder =>
+{ 
+    routeBuilder.MapControllers();
+});
 
 app.UseStaticFiles();
 app.UseSpa(spaBuilder =>
